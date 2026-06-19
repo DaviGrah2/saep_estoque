@@ -3,7 +3,7 @@ from tkinter import messagebox
 from banco import cadastrar_produto
 #import customtkinter as ctk
 
-janela = tk.Tk()
+janela = tk.Tk();
 janela.title("SAEP Estoque Fácil");
 janela.geometry("500x400");
 
@@ -17,23 +17,48 @@ titulo = tk.Label(
 titulo.pack(pady=10);
 
 tk.Label(janela, text="Nome do Produto:").pack
-entrada_nome = tk.Entry(janela, width=40)
+entrada_nome = tk.Entry(janela, width=40);
 entrada_nome.pack()
 
 tk.Label(janela, text="Catrgoria:").pack
-entrada_categoria = tk.Entry(janela, width=40)
+entrada_categoria = tk.Entry(janela, width=40);
 entrada_categoria.pack()
 
 tk.Label(janela, "Quantidade:").pack
-entrada_quantidade = tk.Entry(janela, width=40)
+entrada_quantidade = tk.Entry(janela, width=40);
 entrada_quantidade.pack()
 
 tk.Label(janela, text="Preço:").pack
-entrada_preco = tk.Entry(janela, width=40)
-entrada_preco.pack()
+entrada_preco = tk.Entry(janela, width=40);
+entrada_preco.pack();
 
 def salvar():
-    nome = entrada_nome.get()
-    categoria = entrada_categoria.get()
-    quantidade = entrada_quantidade.get()
-    preco = entrada_preco.get()
+    nome = entrada_nome.get();
+    categoria = entrada_categoria.get();
+    quantidade = entrada_quantidade.get();
+    preco = entrada_preco.get();
+
+
+    if nome == "" or categoria == "" or quantidade == "" or preco == "":
+        messagebox.showerror("Atenção","Preencha todos os campos.");
+        return
+    
+    cadastrar_produto( nome , categoria , int(quantidade) , float(preco) );
+    messagebox.showinfo("Sucesso" , "Produto cadastrado com sucesso!");
+
+    entrada_nome.delete(0, tk.END);
+    entrada_categoria.delete(0, tk.END);
+    entrada_quantidade.delete(0, tk.END);
+    entrada_preco.delete(0, tk.END);
+    
+botao_salvar = tk.Button(
+    janela,
+    text="Cadastrar Produto",
+    command=salvar,
+    width=25
+);
+
+botao_salvar.pack(pady=20)
+
+janela.mainloop();
+
