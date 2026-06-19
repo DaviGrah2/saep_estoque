@@ -32,3 +32,8 @@ tk.Label(janela, text="Preço:").pack
 entrada_preco = tk.Entry(janela, width=40)
 entrada_preco.pack()
 
+def salvar():
+    nome = entrada_nome.get()
+    categoria = entrada_categoria.get()
+    quantidade = entrada_quantidade.get()
+    preco = entrada_preco.get()
