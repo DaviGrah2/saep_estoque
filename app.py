@@ -5,7 +5,7 @@ from tkinter import ttk
 #import customtkinter as ctk
 
 janela = tk.Tk();
-janela.title("SAEP Estoque Fácil");
+janela.title("SAEP Estoque Fácil Controlado");
 janela.geometry("500x400");
 
 frame_botoes = tk.Frame(janela, bg="#f4f6f8")
@@ -39,7 +39,9 @@ def atualizar_tabela():
 
     for produto in produtos:
         tabela.insert("", tk.END,
-values=produto)
+    values=produto)
+        
+    messagebox.showinfo("Sucesso", "Atualização completa !")
 
 def excluir():
     item_selecionado = tabela.selection()
@@ -69,7 +71,7 @@ botao_excluir.grid(row=0, column=2, padx=5)
 
 titulo = tk.Label(
     janela,
-    text="SAEP Estoque Fácil",
+    text="SAEP Estoque Fácil Controlado",
     font=("Arial", 18 , "bold")
 );
 titulo.pack(pady=10);
@@ -111,10 +113,25 @@ def salvar():
       return
    
     if preco <= 0:
-      messagebox.showwarning
+        messagebox.showwarning(
+        "Atenção",
+        "O preço deve ser maior que zero."
+    )
+        return
 
     if nome == "" or categoria == "" or quantidade == "" or preco == "":
         messagebox.showerror("Atenção","Preencha todos os campos.");
+        return
+    
+    if nome == "" or categoria == "":
+        messagebox.showerror("Atenção", "Preencha todos os campos.")
+        return
+
+    if len(nome.strip()) < 3:
+        messagebox.showwarning(
+        "Atenção",
+        "O nome do produto deve ter pelo menos 3 letras."
+    )
         return
     
     cadastrar_produto( nome , categoria , int(quantidade) , float(preco) );
@@ -153,5 +170,16 @@ botao_limpar = tk.Button(
 )
 botao_limpar.grid(row=0, column=1, padx=5)
 
-atualizar_tabela()
+botao_atualizar = tk.Button(
+    frame_botoes,
+    text="Atualizar Tabela",
+    command=atualizar_tabela,
+    width=20,
+    bg="#2E8B57",
+    fg="white",
+    font=("Arial", 10, "bold")
+)
+
+botao_atualizar.grid(row=0, column=3, padx=5)
+
 janela.mainloop();
