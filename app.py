@@ -8,6 +8,9 @@ janela = tk.Tk();
 janela.title("SAEP Estoque Fácil");
 janela.geometry("500x400");
 
+frame_botoes = tk.Frame(janela, bg="#f4f6f8")
+frame_botoes.pack(pady=10)
+
 tabela = ttk.Treeview(
     janela,
     columns=("id", "nome", "categoria", "quantidade", "preco"),
@@ -54,14 +57,15 @@ def excluir():
     messagebox.showinfo("Sucesso", "Produto excluido com sucesso !")
 
 botao_excluir = tk.Button(
-    janela,
-    command=excluir,
-    text="Botão Excluir",
-    width=25
-
+      frame_botoes,
+      text="Excluir Produto",
+      command=excluir,
+      width=20,
+      bg="#e7490f",
+      fg="white",
+      font=("Arial", 10, "bold")
 )
-botao_excluir.pack(pady=5)
-
+botao_excluir.grid(row=0, column=2, padx=5)
 
 titulo = tk.Label(
     janela,
@@ -92,6 +96,22 @@ def salvar():
     quantidade = entrada_quantidade.get();
     preco = entrada_preco.get();
 
+    try:
+      quantidade = int(quantidade)
+      preco = float(preco)
+    except ValueError:
+      messagebox.showwarning(
+          "Atenção",
+          "Quantidade deve ser número inteiro e preço deve usar ponto. Exemplo: 2.50"
+      )
+      return
+   
+    if quantidade < 0:
+      messagebox.showwarning("Atenção", "A quantidade não pode ser negativa.")
+      return
+   
+    if preco <= 0:
+      messagebox.showwarning
 
     if nome == "" or categoria == "" or quantidade == "" or preco == "":
         messagebox.showerror("Atenção","Preencha todos os campos.");
@@ -99,20 +119,39 @@ def salvar():
     
     cadastrar_produto( nome , categoria , int(quantidade) , float(preco) );
     messagebox.showinfo("Sucesso" , "Produto cadastrado com sucesso!");
+    limpar_campos()
+    atualizar_tabela()
 
     entrada_nome.delete(0, tk.END);
     entrada_categoria.delete(0, tk.END);
     entrada_quantidade.delete(0, tk.END);
     entrada_preco.delete(0, tk.END);
-    atualizar_tabela()
-    
+
+def limpar_campos():
+      entrada_nome.delete(0, tk.END)
+      entrada_categoria.delete(0, tk.END)
+      entrada_quantidade.delete(0, tk.END)
+      entrada_preco.delete(0, tk.END)
+      messagebox.showinfo("Sucesso", "Cadastro limpo com sucesso !")
+
 botao_salvar = tk.Button(
-    janela,
-    text="Cadastrar Produto",
-    command=salvar,
-    width=25
-);
+      frame_botoes,
+      text="Cadastrar Produto",
+      command=salvar,
+      width=20,
+      bg="#164193",
+      fg="white",
+      font=("Arial", 10, "bold")
+)
+botao_salvar.grid(row=0, column=0, padx=5)
 
-botao_salvar.pack(pady=20)
+botao_limpar = tk.Button(
+      frame_botoes,
+      text="Limpar Campos",
+      command=limpar_campos,
+      width=20
+)
+botao_limpar.grid(row=0, column=1, padx=5)
 
+atualizar_tabela()
 janela.mainloop();
