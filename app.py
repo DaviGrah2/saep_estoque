@@ -53,6 +53,16 @@ def excluir():
 
     messagebox.showinfo("Sucesso", "Produto excluido com sucesso !")
 
+botao_excluir = tk.Button(
+    janela,
+    command=excluir,
+    width=25
+
+)
+botao_excluir.pack(pady=5)
+
+
+
 
 titulo = tk.Label(
     janela,
