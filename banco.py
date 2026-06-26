@@ -26,3 +26,17 @@ def cadastrar_produto( nome, categoria , quantidade , preco ):
 
     cursor.close()
     conexao.close()
+
+
+    def listar_produtos():
+        conexao = conectar()
+        cursor = conexao.cursor()
+
+        cursor.execute("select id, nome, categoria, quantidade, preco from produtos")
+        produtos = cursor.fetchall()
+
+        cursor.close()
+        conexao.close()
+
+        return produtos
+        
