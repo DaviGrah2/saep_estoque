@@ -56,12 +56,11 @@ def excluir():
 botao_excluir = tk.Button(
     janela,
     command=excluir,
+    text="Botão Excluir",
     width=25
 
 )
 botao_excluir.pack(pady=5)
-
-
 
 
 titulo = tk.Label(
@@ -114,10 +113,6 @@ botao_salvar = tk.Button(
     width=25
 );
 
-
 botao_salvar.pack(pady=20)
-
-
-
 
 janela.mainloop();
