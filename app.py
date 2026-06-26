@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from banco import cadastrar_produto, listar_produtos
+from banco import cadastrar_produto, listar_produtos, excluir_produto
 from tkinter import ttk
 #import customtkinter as ctk
 
@@ -38,9 +38,21 @@ def atualizar_tabela():
         tabela.insert("", tk.END,
 values=produto)
 
-atualizar_tabela()
+def excluir():
+    item_selecionado = tabela.selection()
 
-janela.mainloop()
+    if not item_selecionado:
+        messagebox.showwarning("Atenção", "Selecione um produto para excluir")
+        return   
+    
+    item = tabela.item(item_selecionado)
+    id_produto = item["values"][0]    
+
+    excluir_produto(id_produto)
+    atualizar_tabela()
+
+    messagebox.showinfo("Sucesso", "Produto excluido com sucesso !")
+
 
 titulo = tk.Label(
     janela,
@@ -83,6 +95,7 @@ def salvar():
     entrada_categoria.delete(0, tk.END);
     entrada_quantidade.delete(0, tk.END);
     entrada_preco.delete(0, tk.END);
+    atualizar_tabela()
     
 botao_salvar = tk.Button(
     janela,
@@ -91,10 +104,10 @@ botao_salvar = tk.Button(
     width=25
 );
 
+
 botao_salvar.pack(pady=20)
 
 
 
 
 janela.mainloop();
-
