@@ -134,6 +134,13 @@ def salvar():
     )
         return
     
+    if not nome.isalpha():
+        messagebox.showwarning(
+        "Atenção",
+        "O nome deve conter apenas letras."
+    )
+        return
+    
     cadastrar_produto( nome , categoria , int(quantidade) , float(preco) );
     messagebox.showinfo("Sucesso" , "Produto cadastrado com sucesso!");
     limpar_campos()
