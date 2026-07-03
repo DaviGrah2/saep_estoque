@@ -1,3 +1,6 @@
+# Nome: Davi Braga Grah
+# Turma: 2025/1 v1
+
 # SAEP Estoque Fácil 
  
 Sistema simples desenvolvido no Hackathon SAEP para controlar produtos de uma loja. 
