@@ -166,6 +166,11 @@ def salvar():
 
     if resposta:
         print("Sim")
+        cadastrar_produto( nome , categoria , int(quantidade) , float(preco) );
+        messagebox.showinfo("Sucesso" , "Produto cadastrado com sucesso!");
+        limpar_campos()
+        atualizar_tabela()
+        
     else:
         print("Não")
         return
