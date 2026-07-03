@@ -152,6 +152,10 @@ def salvar():
         print("Não")
         return
     
+    if len(preco) > 10:
+        messagebox.showwarning("Atenção", "VALOR INVALIDO ! ")
+        return
+    
     cadastrar_produto( nome , categoria , int(quantidade) , float(preco) );
     messagebox.showinfo("Sucesso" , "Produto cadastrado com sucesso!");
     limpar_campos()
