@@ -7,9 +7,27 @@ from tkinter import ttk
 janela = tk.Tk();
 janela.title("SAEP Estoque Fácil Controlado");
 janela.geometry("500x400");
+janela.configure(bg="#dbeafe")  # Azul claro
 
 frame_botoes = tk.Frame(janela, bg="#f4f6f8")
 frame_botoes.pack(pady=10)
+
+style = ttk.Style()
+
+style.theme_use("clam")
+
+style.configure(
+    "Treeview",
+    font=("Arial", 10),
+    rowheight=28
+)
+
+style.configure(
+    "Treeview.Heading",
+    font=("Arial", 10, "bold"),
+    background="#164193",
+    foreground="white"
+)
 
 tabela = ttk.Treeview(
     janela,
@@ -76,19 +94,19 @@ titulo = tk.Label(
 );
 titulo.pack(pady=10);
 
-tk.Label(janela, text="Nome do Produto:").pack();
+tk.Label(janela, text="Nome do Produto:",bg="#f4f6f8").pack();
 entrada_nome = tk.Entry(janela, width=40);
 entrada_nome.pack();
 
-tk.Label(janela, text="Categoria:").pack();
+tk.Label(janela, text="Categoria:",bg="#f4f6f8").pack();
 entrada_categoria = tk.Entry(janela, width=40);
 entrada_categoria.pack();
 
-tk.Label(janela, text="Quantidade:").pack();
+tk.Label(janela, text="Quantidade:",bg="#f4f6f8").pack();
 entrada_quantidade = tk.Entry(janela, width=40);
 entrada_quantidade.pack();
 
-tk.Label(janela, text="Preço:").pack();
+tk.Label(janela, text="Preço:",bg="#f4f6f8").pack();
 entrada_preco = tk.Entry(janela, width=40);
 entrada_preco.pack();
 
