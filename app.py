@@ -141,6 +141,17 @@ def salvar():
     )
         return
     
+    resposta = messagebox.askyesno(
+        "Confimação",
+        "Deseja Prossegir mesmo com valor do estoque abaixo do ideal?"
+    )
+
+    if resposta:
+        print("Sim")
+    else:
+        print("Não")
+        return
+    
     cadastrar_produto( nome , categoria , int(quantidade) , float(preco) );
     messagebox.showinfo("Sucesso" , "Produto cadastrado com sucesso!");
     limpar_campos()
@@ -157,6 +168,23 @@ def limpar_campos():
       entrada_quantidade.delete(0, tk.END)
       entrada_preco.delete(0, tk.END)
       messagebox.showinfo("Sucesso", "Cadastro limpo com sucesso !")
+
+def verificar_estoque_baixo():
+    produtos = listar_produtos() 
+    alerta = [] 
+
+    for produto in produtos: 
+        nome = produto[1] 
+        quantidade = produto[3] 
+ 
+        if quantidade <= 5: 
+            alerta.append(nome)
+
+    if alerta: 
+        mensagem = "Produtos com estoque baixo:\n" + "\n".join(alerta) 
+        messagebox.showwarning("Estoque baixo", mensagem) 
+    else: 
+        messagebox.showinfo("Estoque", "Nenhum produto com estoque baixo.") 
 
 botao_salvar = tk.Button(
       frame_botoes,
@@ -188,5 +216,13 @@ botao_atualizar = tk.Button(
 )
 
 botao_atualizar.grid(row=0, column=3, padx=5)
+
+botao_estoque = tk.Button( 
+    janela, 
+    text="Verificar Estoque Baixo", 
+    command=verificar_estoque_baixo, 
+    width=25 
+) 
+botao_estoque.pack(pady=5) 
 
 janela.mainloop();
